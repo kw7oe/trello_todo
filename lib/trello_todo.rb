@@ -1,5 +1,10 @@
-require "trello_todo/version"
+require 'trello_todo/version'
+require 'trello_todo/trello_api'
 
 module TrelloTodo
-  # Your code goes here...
+
+  def self.run(args)
+    TrelloAPI.new()
+  end
+
 end
