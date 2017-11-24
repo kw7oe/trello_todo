@@ -1,11 +1,23 @@
-require 'net/http'
 require 'trello_todo/store'
+require 'trello_todo/http'
 
 module TrelloTodo
   class TrelloAPI
     def initialize
       load_config
-      puts "Initalize complete"
+      @base_url = "https://api.trello.com"
+      @auth_url = "key=#{@config.fetch 'API_KEY'}&token=#{@config.fetch 'AUTH_TOKEN'}"
+      @boards = get_boards_for(user: @config.fetch('username'))
+    end
+
+    def get_boards_for(user:)
+      endpoint = "/1/members/#{user}/boards?"
+      url = @base_url + endpoint + @auth_url
+
+      response = HTTP.get(url)
+      response.map do |board|
+        { id: board['id'], name: board['name'] }
+      end
     end
 
     private
@@ -19,6 +31,16 @@ module TrelloTodo
         get_auth_token
         Store.store_config(@config)
       }
+      @config.fetch('username') {
+        get_username
+        Store.store_config(@config)
+      }
+    end
+
+    def get_username
+      print "Enter your Trello username here: "
+      username = $stdin.gets.chomp
+      @config['username'] = username
     end
 
     def get_api_key
@@ -32,7 +54,7 @@ module TrelloTodo
     end
 
     def get_auth_token
-      auth_endpoint = 'https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&key='
+      auth_endpoint = 'https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&scope=read,write&response_type=token&key='
       request_url = auth_endpoint + @config['API_KEY']
       puts "Please visit this url to get authentication token."
       puts request_url
