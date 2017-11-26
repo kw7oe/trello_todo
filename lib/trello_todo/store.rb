@@ -1,5 +1,4 @@
 module TrelloTodo
-
   class Store
     CONFIGURATION_FILE = Dir.home + '/.trello_todo'
 
@@ -12,12 +11,11 @@ module TrelloTodo
     end
 
     def self.load_config
-      return nil unless File.exists? CONFIGURATION_FILE
+      return nil unless File.exist? CONFIGURATION_FILE
       File.readlines(CONFIGURATION_FILE).map do |line|
         key, value = line.chomp.split('=')
         [key, value]
       end.to_h
     end
   end
-
 end
