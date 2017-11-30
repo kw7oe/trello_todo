@@ -1,9 +1,9 @@
-require 'trello_todo/checklist'
+require 'trello_todo//trello/checklist'
 
 module TrelloTodo
   class Card
     attr_reader :id, :name
-    
+
     def initialize(id:, name:, labels:)
       @id = id
       @name = name
@@ -24,10 +24,5 @@ module TrelloTodo
     def to_s
       "#{id}: #{name}"
     end
-
   end
-
 end
-
-
-

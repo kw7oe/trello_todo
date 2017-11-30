@@ -1,4 +1,4 @@
-require 'trello_todo/board'
+require 'trello_todo/trello/board'
 
 module TrelloTodo
   class Member
@@ -23,6 +23,5 @@ module TrelloTodo
     def to_s
       username
     end
-
   end
 end

@@ -1,5 +1,5 @@
 require 'trello_todo/client'
-require 'trello_todo/list'
+require 'trello_todo/trello/list'
 
 module TrelloTodo
   class Board
@@ -26,6 +26,5 @@ module TrelloTodo
     def to_s
       "#{id}: #{name}"
     end
-
   end
 end

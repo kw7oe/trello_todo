@@ -1,9 +1,9 @@
-require 'trello_todo/check_item'
+require 'trello_todo/trello/check_item'
 
 module TrelloTodo
   class Checklist
-    attr_reader :id, :name
-    
+    attr_reader :id, :name, :items
+
     def initialize(id:, name:, items:)
       @id = id
       @name = name
@@ -12,17 +12,8 @@ module TrelloTodo
       end
     end
 
-    def items
-      @items
-    end
-
     def to_s
       "#{id}: #{name}"
     end
-
   end
-
 end
-
-
-

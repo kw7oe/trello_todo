@@ -1,4 +1,4 @@
-require 'trello_todo/card'
+require 'trello_todo/trello/card'
 
 module TrelloTodo
   class List
@@ -23,6 +23,5 @@ module TrelloTodo
     def to_s
       "#{id}: #{name}"
     end
-
   end
 end

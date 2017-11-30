@@ -3,7 +3,7 @@ module TrelloTodo
     attr_reader :id, :name, :state
 
     def initialize(id:, name:, state:)
-      @id = id 
+      @id = id
       @name = name
       @state = state
     end
