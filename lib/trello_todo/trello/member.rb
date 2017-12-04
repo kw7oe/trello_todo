@@ -15,6 +15,7 @@ module TrelloTodo
 
       endpoint = "/1/members/#{username}/boards?"
       response = Client.get(endpoint)
+
       @boards = response.map do |board|
         Board.new(id: board['id'], name: board['name'])
       end
